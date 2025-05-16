@@ -1,10 +1,18 @@
 trigger:
- - main 
+  branches:
+    include:
+      - main
   
-pool: 
-  vmImage: :'ubuntu-latest'
- 
-steps: 
-- script: echo "Build started" 
-- script: python hello.py 
-- script: echo "Pipeline finished"
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.x'
+
+- script: |
+    echo "Build started"
+    python hello.py
+    echo "Pipeline finished"
+  displayName: 'Run Python Script'
